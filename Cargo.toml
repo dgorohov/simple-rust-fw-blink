@@ -1,0 +1,59 @@
+[package]
+name = "fw"
+version = "0.0.1"
+authors = ["Dmitry Gorohov <dmitry.gorohov@gmail.com>"]
+edition = "2018"
+
+[dependencies.semihosting]
+path = "includes/semihosting"
+default-features = false
+features = [ "semihosting" ]
+
+[dependencies.nrf]
+path = "includes/nrf"
+
+[dependencies.cortex-m-rt]
+version  = "0.6.11"
+optional = true
+default-features = false
+features = [ ]
+
+[dependencies.cortex-m]
+version  = ">= 0.5.10, < 0.7"
+default-features = false
+features = [ "const-fn", "inline-asm" ]
+
+[dependencies.embedded-hal]
+version="0.2.3"
+default-features = false
+features = [ "unproven" ]
+
+[dependencies.nrf52840-hal]
+version="0.8.1"
+default-features = false
+features = [ "rt" ]
+
+[dependencies.nrf52840-pac]
+version="0.8.0"
+default-features = false
+features = [ "rt" ]
+
+[dependencies.nrf52-hal-common]
+version="0.8.1"
+default-features = false
+features = [ "52840" ]
+
+[profile.release]
+lto = true
+debug = true
+
+[features]
+default = [ "rt" ]
+rt = ["nrf52840-hal/rt", "cortex-m-rt"]
+
+[workspace]
+members = [
+    "includes/semihosting",
+    "includes/simcom",
+    "includes/nrf",
+]

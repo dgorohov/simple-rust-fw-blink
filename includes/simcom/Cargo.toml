@@ -1,0 +1,17 @@
+[package]
+name = "simcom"
+version = "0.1.0"
+authors = ["Dmitry Gorohov <dmitry.gorohov@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+nb = "0.1.2"
+
+[dependencies.embedded-hal]
+version="0.2.3"
+default-features = false
+features = [ "unproven" ]
+
+[features]
+sim76xx = []
+sim868  = []

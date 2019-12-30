@@ -1,0 +1,11 @@
+[package]
+name = "nrf"
+version = "0.0.1"
+authors = ["Dmitry Gorohov <dmitry.gorohov@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+
+[build-dependencies]
+bindgen = "0.47.0"
+cc = "1.0.48"
