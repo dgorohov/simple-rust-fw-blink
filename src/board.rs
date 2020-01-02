@@ -1,16 +1,14 @@
-extern crate nrf52840_hal;
-extern crate embedded_hal;
-
-use nrf52840_hal::{
-    prelude::*,
+use crate::hal::{
     gpio::{
         Output, Pin, PushPull, Level,
     },
-    nrf52840_pac::Peripherals,
 };
 
+use crate::prelude::*;
+use crate::target::Peripherals;
+
 #[allow(deprecated)]
-use embedded_hal::digital::{StatefulOutputPin, OutputPin};
+use embedded_hal::digital::StatefulOutputPin;
 
 pub struct Led(Pin<Output<PushPull>>);
 

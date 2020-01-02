@@ -1,69 +1,29 @@
-use embedded_hal::serial;
-use nb::block;
+use crate::driver::UarteDriver;
 
-pub struct SerialDriver<S> {
-    serial: S,
-    read_buf: [u8; 64],
-}
-
-pub enum Error {
+pub enum SerialError {
     SerialWrite,
     SerialRead,
-    ReadBufferTooSmall,
-    CommandFailed,
-    EncodingError,
 }
 
-const CR: u8 = 0x0d;
-const LF: u8 = 0x0a;
-const OK: [u8; 2] = [b'O', b'K'];
+pub trait SerialDriver {
+    fn write(&mut self, buffer: &[u8]) -> Result<(), SerialError>;
+}
 
-impl<S, E> SerialDriver<S>
-    where S: serial::Read<u8, Error=E> + serial::Write<u8, Error=E> {
-    fn write_byte(&mut self, byte: u8) -> Result<(), Error> {
-        block!(self.serial.write(byte)).map_err(|_| Error::SerialWrite)
+pub struct Driver<S>(S);
+
+impl<S> Driver<S> where S: UarteDriver {
+    pub fn new(serial: S) -> Self {
+        Driver(serial)
     }
+}
 
-    fn write_crlf(&mut self) -> Result<(), Error> {
-        self.write_byte(CR)?;
-        self.write_byte(LF)
-    }
-
-    fn write_all(&mut self, buffer: &[u8]) -> Result<(), Error> {
-        for byte in buffer {
-            self.write_byte(*byte)?;
+impl<S> SerialDriver for Driver<S> where S: UarteDriver {
+    fn write(&mut self, buffer: &[u8]) -> Result<(), SerialError> {
+        let buf = &mut [0; 16][..]; // avoiding EasyDMA reading the buffer from the flash
+        for block in buffer.chunks(16) {
+            buf[..block.len()].copy_from_slice(block);
+            self.0.write(&buf[..block.len()]).map_err(|_| SerialError::SerialWrite)?
         }
         Ok(())
-    }
-
-    fn read_byte(&mut self) -> Result<u8, Error> {
-        block!(self.serial.read()).map_err(|_| Error::SerialRead)
-    }
-
-    fn read_line(&mut self) -> Result<&[u8], Error> {
-        let buflen = self.read_buf.len();
-        let mut i = 0;
-        loop {
-            match self.read_byte()? {
-                LF if self.read_buf[i - 1] == CR => {
-                    return Ok(&self.read_buf[0..(i - 1)]);
-                }
-                other => {
-                    self.read_buf[i] = other;
-                }
-            }
-            i += 1;
-            if i >= buflen {
-                return Err(Error::ReadBufferTooSmall);
-            }
-        }
-    }
-
-    fn send_raw_command(&mut self, command: &[&str]) -> Result<&[u8], Error> {
-        for part in command {
-            self.write_all(part.as_bytes())?;
-        }
-        self.write_crlf()?;
-        self.read_line()
     }
 }

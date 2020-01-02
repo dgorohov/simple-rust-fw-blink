@@ -259,11 +259,13 @@ dependencies = [
  "cortex-m",
  "cortex-m-rt",
  "embedded-hal",
+ "nb",
  "nrf",
  "nrf52-hal-common",
  "nrf52840-hal",
  "nrf52840-pac",
  "semihosting",
+ "simcom",
 ]
 
 [[package]]
@@ -291,6 +293,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8be18de09a56b60ed0edf84bc9df007e30040691af7acd1c41874faac5895bfb"
 
 [[package]]
+name = "hash32"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d4041af86e63ac4298ce40e5cca669066e75b6f1aa3390fe2561ffa5e1d9f4cc"
+dependencies = [
+ "byteorder",
+]
+
+[[package]]
 name = "hashbrown"
 version = "0.1.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -298,6 +309,17 @@ checksum = "3bae29b6653b3412c2e71e9d486db9f9df5d701941d86683005efb9f2d28e3da"
 dependencies = [
  "byteorder",
  "scopeguard",
+]
+
+[[package]]
+name = "heapless"
+version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f339aa7d51777fc0af6aa7cbeb277dfc6e6c029cbdeda48d0fbb92c2337f0e69"
+dependencies = [
+ "as-slice",
+ "generic-array 0.13.2",
+ "hash32",
 ]
 
 [[package]]
@@ -539,7 +561,9 @@ name = "simcom"
 version = "0.1.0"
 dependencies = [
  "embedded-hal",
+ "heapless",
  "nb",
+ "uarte",
 ]
 
 [[package]]
@@ -597,6 +621,15 @@ name = "typenum"
 version = "1.11.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6d2783fe2d6b8c1101136184eb41be8b1ad379e4657050b8aaff0c79ee7575f9"
+
+[[package]]
+name = "uarte"
+version = "0.1.0"
+dependencies = [
+ "nrf52-hal-common",
+ "nrf52840-hal",
+ "nrf52840-pac",
+]
 
 [[package]]
 name = "unicode-width"

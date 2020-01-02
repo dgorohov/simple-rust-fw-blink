@@ -10,20 +10,21 @@
 #[cfg(feature = "rt")]
 extern crate cortex_m_rt as rt;
 
-extern crate embedded_hal;
-extern crate nrf52840_pac;
-
-// local crates
-extern crate nrf;
-extern crate semihosting;
-
-mod board;
-
 use rt::{entry, pre_init};
 use crate::board::Board;
 use cortex_m::asm::bkpt;
 use nrf::_nrf_delay_ms;
 use semihosting::log;
+
+use nrf52840_hal as hal;
+use nrf52840_pac as target;
+
+pub mod prelude {
+    pub use crate::hal::prelude::*;
+    pub use crate::hal::gpio::GpioExt;
+}
+
+mod board;
 
 #[pre_init]
 unsafe fn __init() {}

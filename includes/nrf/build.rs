@@ -6,6 +6,8 @@ use std::path::{PathBuf, Path};
 use std::process::Command;
 
 fn main() {
+    println!("cargo:rerun-if-changed=shims/shims.h");
+    println!("cargo:rerun-if-changed=shims/sdk_config.h");
     println!("cargo:rerun-if-changed=bindings.h");
     println!("cargo:rustc-link-lib=static=nrf");
     run_libmake();
@@ -88,6 +90,7 @@ static INCLUDES: &[&str] = &[
     "nRF5-sdk/modules/nrfx",
     "nRF5-sdk/modules/nrfx/mdk",
     "nRF5-sdk/modules/nrfx/hal",
+    "nRF5-sdk/modules/nrfx/drivers",
     "nRF5-sdk/modules/nrfx/drivers/include",
     "nRF5-sdk/integration/nrfx",
     "nRF5-sdk/components/libraries/delay",

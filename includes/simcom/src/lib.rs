@@ -1,6 +1,8 @@
 #![no_std]
 
-extern crate embedded_hal;
-extern crate nb;
+pub mod serial;
+pub mod simcom;
 
-mod serial;
+pub mod driver {
+    pub use uarte::uart::UarteDriver;
+}
