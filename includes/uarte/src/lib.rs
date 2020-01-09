@@ -17,7 +17,7 @@ pub mod pins {
 
 pub mod uart;
 
-pub(crate) fn slice_in_ram(slice: &[u8]) -> bool {
+pub fn slice_in_ram(slice: &[u8]) -> bool {
     let ptr = slice.as_ptr() as usize;
     ptr >= constants::SRAM_LOWER &&
         (ptr + slice.len()) < constants::SRAM_UPPER

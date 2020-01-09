@@ -15,6 +15,9 @@ features = [ "semihosting" ]
 [dependencies.nrf]
 path = "includes/nrf"
 
+[dependencies.fsm]
+path = "includes/fsm"
+
 [dependencies.simcom]
 path = "includes/simcom"
 
@@ -51,7 +54,7 @@ features = [ "52840" ]
 
 [profile.release]
 lto = true
-debug = true
+debug = false
 
 [features]
 default = [ "rt" ]
@@ -63,4 +66,5 @@ members = [
     "includes/simcom",
     "includes/nrf",
     "includes/uarte",
+    "includes/fsm",
 ]

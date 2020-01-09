@@ -83,7 +83,6 @@ SECTIONS
         KEEP(*(.vector_table.reset_vector));
         __reset_vector = .;
 
-
         KEEP(*(.vector_table.exceptions));
         __eexceptions = .;
 

@@ -5,16 +5,28 @@ use crate::{
         Driver,
         SerialError,
     },
+    hal::gpio::{
+        Pin,
+        Output,
+        PushPull,
+    },
 };
+use embedded_hal::digital::OutputPin;
 
-pub struct SimComDriver<S>(Driver<S>);
+pub struct Pins {
+    pub reset_pin: Pin<Output<PushPull>>,
+    pub power_pin: Pin<Output<PushPull>>,
+    pub dtr_pin: Pin<Output<PushPull>>,
+}
+
+pub struct SimComDriver<S>(Driver<S>, Pins);
 
 const CR: u8 = 0x0d;
 const LF: u8 = 0x0a;
 
 impl<S> SimComDriver<S> where S: UarteDriver {
-    pub fn new(driver: S) -> Self {
-        SimComDriver(Driver::new(driver))
+    pub fn new(driver: S, pins: Pins) -> Self {
+        SimComDriver(Driver::new(driver), pins)
     }
 
     pub fn send_command(&mut self, command: &[&str]) -> Result<(), SerialError> {
@@ -26,5 +38,16 @@ impl<S> SimComDriver<S> where S: UarteDriver {
 
     fn send_crlf(&mut self) -> Result<(), SerialError> {
         self.0.write(&[CR, LF])
+    }
+
+    pub fn turn_off(&mut self) {
+        self.1.power_pin.set_low();
+        self.1.reset_pin.set_high()
+    }
+
+    pub fn turn_on(&mut self) {
+        self.1.power_pin.set_high();
+        self.1.reset_pin.set_low();
+        self.1.dtr_pin.set_low()
     }
 }

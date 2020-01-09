@@ -16,4 +16,19 @@ features = [ "unproven" ]
 [dependencies.uarte]
 path = "../uarte"
 
+[dependencies.nrf52840-hal]
+version="0.8.1"
+default-features = false
+features = [ "rt" ]
+
+[dependencies.nrf52840-pac]
+version="0.8.0"
+default-features = false
+features = [ "rt" ]
+
+[dependencies.nrf52-hal-common]
+version="0.8.1"
+default-features = false
+features = [ "52840" ]
+
 [features]
