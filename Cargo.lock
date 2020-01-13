@@ -253,20 +253,12 @@ dependencies = [
 ]
 
 [[package]]
-name = "fsm"
-version = "0.1.0"
-dependencies = [
- "heapless",
-]
-
-[[package]]
 name = "fw"
 version = "0.0.1"
 dependencies = [
  "cortex-m",
  "cortex-m-rt",
  "embedded-hal",
- "fsm",
  "nb",
  "nrf",
  "nrf52-hal-common",

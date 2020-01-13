@@ -1,8 +1,0 @@
-[package]
-name = "fsm"
-version = "0.1.0"
-authors = ["Dmitry Gorohov <dmitry.gorohov@gmail.com>"]
-edition = "2018"
-
-[dependencies]
-heapless="0.5.1"

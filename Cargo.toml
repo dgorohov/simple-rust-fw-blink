@@ -15,9 +15,6 @@ features = [ "semihosting" ]
 [dependencies.nrf]
 path = "includes/nrf"
 
-[dependencies.fsm]
-path = "includes/fsm"
-
 [dependencies.simcom]
 path = "includes/simcom"
 
@@ -66,5 +63,4 @@ members = [
     "includes/simcom",
     "includes/nrf",
     "includes/uarte",
-    "includes/fsm",
 ]
