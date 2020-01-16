@@ -28,7 +28,7 @@ PROVIDE(HardFault = HardFault_);
 # PROVIDE(__pre_init = DefaultPreInit);
 
 #
-# Interrupts
+# Provided by nrf52840-pac
 #
 PROVIDE(CRYPTOCELL = DefaultHandler);
 PROVIDE(POWER_CLOCK = DefaultHandler);

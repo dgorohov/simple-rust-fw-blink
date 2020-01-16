@@ -9,7 +9,7 @@ fn main() {
 
     File::create(out.join("link.x"))
         .unwrap()
-        .write_all(include_bytes!("memory.x"))
+        .write_all(include_bytes!("memory.stm32.x"))
         .unwrap();
 
     println!("cargo:rerun-if-changed=memory.x");
