@@ -14,7 +14,7 @@ mod board;
 
 pub mod hal {
     #[cfg(feature = "nrf_rt")]
-    pub use nrf52840_hal::*;
+    pub use nrf52_hal_common::*;
 
     #[cfg(feature = "stm32_rt")]
     pub use stm32f1xx_hal::*;
@@ -23,13 +23,9 @@ pub mod hal {
 pub mod target {
     #[cfg(feature = "nrf_rt")]
     pub use nrf52840_pac::*;
+
     #[cfg(feature = "stm32_rt")]
     pub use stm32f1xx_hal::pac::*;
-}
-
-pub mod prelude {
-    pub use crate::hal::prelude::*;
-    pub use crate::hal::gpio::GpioExt;
 }
 
 #[pre_init]
