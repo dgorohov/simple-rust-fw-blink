@@ -3,30 +3,15 @@
 
 #[cfg(feature = "rt")]
 extern crate cortex_m_rt as rt;
+mod board;
+mod hal;
+mod target;
 
 use rt::{entry, pre_init};
 use cortex_m::asm::bkpt;
 use semihosting::log;
 use embedded_hal::blocking::delay::DelayMs;
 use crate::board::Board;
-
-mod board;
-
-pub mod hal {
-    #[cfg(feature = "nrf_rt")]
-    pub use nrf52_hal_common::*;
-
-    #[cfg(feature = "stm32_rt")]
-    pub use stm32f1xx_hal::*;
-}
-
-pub mod target {
-    #[cfg(feature = "nrf_rt")]
-    pub use nrf52840_pac::*;
-
-    #[cfg(feature = "stm32_rt")]
-    pub use stm32f1xx_hal::pac::*;
-}
 
 #[pre_init]
 unsafe fn __init() {}
