@@ -1,8 +1,8 @@
 use embedded_hal::digital::*;
-
+use semihosting::log;
 pub struct Led<T: v2::OutputPin>(T);
 
-impl<T> Led<T> where T: v2::OutputPin + v2::StatefulOutputPin{
+impl<T> Led<T> where T: v2::OutputPin + v2::StatefulOutputPin {
     pub fn new(pin: T) -> Self {
         Led(pin)
     }
@@ -16,10 +16,11 @@ impl<T> Led<T> where T: v2::OutputPin + v2::StatefulOutputPin{
     }
 
     pub fn toggle(&mut self) {
-        if self.0.is_set_low().unwrap_or(false) {
-            self.set_low()
-        } else {
-            self.set_high()
+        log!("--> toggle");
+        match self.0.is_set_low() {
+            Ok(false) => self.set_low(),
+            Ok(true) => self.set_high(),
+            Err(_) => (),
         }
     }
 }
