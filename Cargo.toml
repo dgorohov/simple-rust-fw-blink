@@ -10,7 +10,7 @@ nb = "0.1.2"
 [dependencies.semihosting]
 path = "includes/semihosting"
 default-features = false
-features = [ ]
+features = [ "semihosting" ]
 
 [dependencies.cortex-m-rt]
 version  = "0.6.11"

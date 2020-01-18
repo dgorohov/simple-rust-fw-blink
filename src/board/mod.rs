@@ -8,7 +8,7 @@ pub mod led;
 pub mod nrf;
 
 #[cfg(feature = "stm32_rt")]
-pub mod stm32;
+pub mod stm32_bluepill;
 
 pub struct Board<SL> where SL: OutputPin {
     pub status_led: Led<SL>,
