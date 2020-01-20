@@ -39,15 +39,4 @@ impl<S> SimComDriver<S> where S: UarteDriver {
     fn send_crlf(&mut self) -> Result<(), SerialError> {
         self.0.write(&[CR, LF])
     }
-
-    pub fn turn_off(&mut self) {
-        self.1.power_pin.set_low();
-        self.1.reset_pin.set_high()
-    }
-
-    pub fn turn_on(&mut self) {
-        self.1.power_pin.set_high();
-        self.1.reset_pin.set_low();
-        self.1.dtr_pin.set_low()
-    }
 }
