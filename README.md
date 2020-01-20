@@ -6,56 +6,60 @@
 
    Please follow this link: https://medium.com/coinmonks/coding-the-stm32-blue-pill-with-rust-and-visual-studio-code-b21615d8a20 if you wish using VSC.
 
-#### Rusty things:
-  * Update rust or install it if not installed yet. To do so follow the single step on: https://rustup.rs/
-  * Install nightly toolchain:
-    ```
-    # rustup default nightly
-    ```
-    
-  * Install non-std components for the ARM-Cortex targets:
-    ````
-    # rustup target add thumbv6m-none-eabi \
-        thumbv7m-none-eabi \
-        thumbv7em-none-eabi \
-        thumbv7em-none-eabihf
-    ````
+### Rusty things:
+   * Download nRF SDK 15.2 from https://www.nordicsemi.com/-/media/Software-and-other-downloads/SDKs/nRF5/Binaries/nRF5SDK15209412b96.zip
+   and point the link in `includes/nrf/nRF5-sdk` to extracted folder
+   ```
+   # cd includes/nrf
+   # ln -sf <extracted source> nRF5-sdk
+   ```
+   * Update rust or install it if not installed yet. To do so follow the single step on: https://rustup.rs/    
+   * Install nightly toolchain:
+   ```
+   # rustup default nightly
+   ```
+   * Install non-std components for the ARM-Cortex targets:
+   ```
+   # rustup target add thumbv6m-none-eabi \
+     thumbv7m-none-eabi \
+     thumbv7em-none-eabi \
+     thumbv7em-none-eabihf
+   ```    
+   * Install openocd / gdb
 
- * Install openocd / gdb
-    - OpenOCD version 0.10.0 does not have support for nRF52840 device, at least the one I tried to install using brew.
-     To fix it, if we under Mac, and you're brew user, please follow these steps:
-        ```
-        # brew edit open-ocd
-        ```
-    - And update the following lines to:
-        ```
-         def install
-            ENV["CCACHE"] = "none"
-    
-            system "./bootstrap", "nosubmodule" if build.head?
-            system "./configure", "--disable-dependency-tracking",
-                               "--prefix=#{prefix}",
-                               "--enable-buspirate",
-                               "--enable-stlink",
-                               "--enable-dummy",
-                               "--enable-bcm2835gpio",
-                               "--enable-jtag_vpi",
-                               "--enable-remote-bitbang"
-            system "make", "install"
-         end
-        ```
+        - OpenOCD version 0.10.0 does not have support for nRF52840 device, at least the one I tried to install using brew.
+          To fix it, if we under Mac, and you're brew user, please follow these steps:
+            ```
+            # brew edit open-ocd
+            ```
+
+        - And update the following lines to:
+            ```
+             def install
+                ENV["CCACHE"] = "none"
+            
+                system "./bootstrap", "nosubmodule" if build.head?
+                system "./configure", "--disable-dependency-tracking",
+                                   "--prefix=#{prefix}",
+                                   "--enable-buspirate",
+                                   "--enable-stlink",
+                                   "--enable-dummy",
+                                   "--enable-bcm2835gpio",
+                                   "--enable-jtag_vpi",
+                                   "--enable-remote-bitbang"
+                system "make", "install"
+             end
+            ```
         **NOTE:** It is important to have this flag set: **--enable-bcm2835gpio**
-
-    - Under the Linux, grab the sources, and configure it using the following flags
-        ```
-        # ./configure --prefix=/usr/local \
-                --enable-jlink \
-                --enable-oocd_trace \
-                --enable-bcm2835gpio
-        ```
-
-
- * There're no such limitations/issues with **GDB** at the moment, so install it from any source you could.
+    
+        - Under the Linux, grab the sources, and configure it using the following flags
+            ```
+            # ./configure --prefix=/usr/local \
+                    --enable-jlink \
+                    --enable-oocd_trace \
+                    --enable-bcm2835gpio
+            ```    
+   * There're no such limitations/issues with **GDB** at the moment, so install it from any source you could.
 
 ### Happy coding!
 
