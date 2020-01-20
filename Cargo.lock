@@ -111,8 +111,6 @@ dependencies = [
  "nrf52840-hal",
  "nrf52840-pac",
  "semihosting",
- "stm32f1",
- "stm32f1xx-hal",
 ]
 
 [[package]]
@@ -248,34 +246,6 @@ name = "stable_deref_trait"
 version = "1.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "dba1a27d3efae4351c8051072d619e3ade2820635c3958d826bfea39d59b54c8"
-
-[[package]]
-name = "stm32f1"
-version = "0.9.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "22ce629123831891663402861bdc7140ebfd6a34a464329f9b9ec1cfde72055a"
-dependencies = [
- "bare-metal",
- "cortex-m",
- "cortex-m-rt",
- "vcell",
-]
-
-[[package]]
-name = "stm32f1xx-hal"
-version = "0.5.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5549c540b1bb113a09cf805b532132b16e4f7a04c9c31058c2f2f99a54490e43"
-dependencies = [
- "as-slice",
- "cast",
- "cortex-m",
- "cortex-m-rt",
- "embedded-hal",
- "nb",
- "stm32f1",
- "void",
-]
 
 [[package]]
 name = "syn"

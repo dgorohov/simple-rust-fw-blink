@@ -1,5 +1,5 @@
 BIN=fw
-OUTDIR=target/thumbv7em-none-eabi/release
+OUTDIR=target/thumbv7em-none-eabihf/release
 HEX=$(OUTDIR)/$(BIN).hex
 ELF=$(OUTDIR)/$(BIN)
 
@@ -26,6 +26,3 @@ gdb:
 
 openocd:
 	openocd -f config/openocd/openocd.cfg
-
-openocd_stlink:
-	openocd -f config/openocd/openocd_stlinkv2.cfg

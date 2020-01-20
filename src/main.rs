@@ -3,9 +3,16 @@
 
 #[cfg(feature = "rt")]
 extern crate cortex_m_rt as rt;
+
+pub mod hal {
+    pub use nrf52_hal_common::*;
+}
+
+pub mod target {
+    pub use nrf52840_pac::*;
+}
+
 mod board;
-mod hal;
-mod target;
 
 use rt::{entry, pre_init};
 use cortex_m::asm::bkpt;
