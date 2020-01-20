@@ -7,10 +7,11 @@
    Please follow this link: https://medium.com/coinmonks/coding-the-stm32-blue-pill-with-rust-and-visual-studio-code-b21615d8a20 if you wish using VSC.
 
 ### Rusty things:
+   * Download and install ARM gcc toolchain: https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm
    * Download nRF SDK 15.2 from https://www.nordicsemi.com/-/media/Software-and-other-downloads/SDKs/nRF5/Binaries/nRF5SDK15209412b96.zip
-   and point the link in `includes/nrf/nRF5-sdk` to extracted folder
+   and point the link to `includes/nrf/nRF5-sdk`
    ```
-   # cd includes/nrf
+   # cd ~/path_to_sources/includes/nrf
    # ln -sf <extracted source> nRF5-sdk
    ```
    * Update rust or install it if not installed yet. To do so follow the single step on: https://rustup.rs/    
@@ -28,7 +29,7 @@
    * Install openocd / gdb
 
         - OpenOCD version 0.10.0 does not have support for nRF52840 device, at least the one I tried to install using brew.
-          To fix it, if we under Mac, and you're brew user, please follow these steps:
+          To fix it on Mac, please follow these steps:
             ```
             # brew edit open-ocd
             ```
