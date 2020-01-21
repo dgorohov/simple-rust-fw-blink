@@ -1,7 +1,7 @@
 ### Pre-requisites:
- * Install any IDE which supports Rust. I recommend using Visual Studio Code,
+ * Install any IDE which supports Rust. I would recommend using Visual Studio Code,
    since it's easier to setup debugging using gdb/openocd. I am using CLion,
-   I am just a big fan of JetBrains products, and it has very nice Rust plugin.
+   just a big fan of JetBrains products, and it has very nice Rust plugin.
    Please note: CLion is a commercial product.
 
    Please follow this link: https://medium.com/coinmonks/coding-the-stm32-blue-pill-with-rust-and-visual-studio-code-b21615d8a20 if you wish using VSC.
